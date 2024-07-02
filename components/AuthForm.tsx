@@ -17,20 +17,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-
-const formSchema = z.object({
-    email: z.string().email()
-  })
+import Custominput from "./Custominput";
+import { authFormSchema } from "@/lib/utils";
 
 const AuthForm = ({ type }: { type: string }) => {
     const [user, setUser] = useState(null)
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof authFormSchema>>({
+    resolver: zodResolver(authFormSchema),
     defaultValues: {
        email: "",
+       password: ''
     },
   })
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof authFormSchema>) {
 
     console.log(values)
   }
@@ -56,25 +55,10 @@ const AuthForm = ({ type }: { type: string }) => {
         <>
         <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-             <div className="form-item">
-               <FormLabel  className="form-label">
-                 Email
-               </FormLabel>
-               <div className="flex w-full flex-col">
-                <FormControl>
-                    <Input placeholder="Enter your email"
-                    className="input-class"{...field}/>
-                </FormControl>
-                <FormMessage className = "form-message mt-2" />
-               </div>
-             </div>
-          )}
-        />
-        
+        <Custominput control = {form.control}   name = 'email' label="Email" placeholder="Enter your Email"/>
+
+        <Custominput control = {form.control}   name = 'password' label="Password" placeholder="Enter your Password"/>
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>

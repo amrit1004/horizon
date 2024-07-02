@@ -3,11 +3,12 @@ import { Input } from "./ui/input";
 import {
   FormControl ,FormField,FormLabel,FormMessage,
 } from "@/components/ui/form"
-import { Form } from 'react-hook-form';
-
+import { Control, FieldPath, Form } from 'react-hook-form';
+import {z} from 'zod'
+import { authFormSchema } from '@/lib/utils';
 interface CustomInput {
-    form: typeof Form,
-    name: string ,
+    control: Control<z.infer<typeof authFormSchema>>,
+    name: FieldPath<z.infer<typeof authFormSchema>>,
     label: string,
     placeholder: string
 }
