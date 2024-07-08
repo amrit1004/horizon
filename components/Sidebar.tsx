@@ -31,7 +31,7 @@ function Sidebar({user}: SiderbarProps) {
               )
             }
           )}
-          <Footer user = {user}/>
+          <Footer user={user} />
         </nav>
     </section>
   )
