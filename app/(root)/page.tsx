@@ -16,6 +16,10 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
 
   const account = await getAccount({ appwriteItemId })
+  console.log({
+    accountsData,
+    account
+  })
   return (
     <section className='home'>
         <div className="home-content">
@@ -23,7 +27,7 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
                <HeaderBox
                  type = "greeting" 
                  title = "Welcome"
-                 user = {loggedIn?.name || "Guest"}
+                 user = {loggedIn?.firstName || "Guest"}
                  subtext = "Access and manage your account and transactions efficiently"
                  />
                  <TotalBalanceBox
@@ -35,7 +39,7 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
             </header>
             RECENT TRANSACTIONS
         </div>
-        <RightSidebar user = {loggedIn} transactions={account.transactions} banks = {accountsData.slice(0,2)}/>
+        <RightSidebar user = {loggedIn} transactions={accounts?.transactions} banks = {accountsData?.slice(0,2)}/>
     </section>
   )
 }
